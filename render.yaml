@@ -1,0 +1,6 @@
+services:
+  - type: web
+    name: shellcoach
+    env: docker
+    dockerfilePath: ./Dockerfile
+    plan: free

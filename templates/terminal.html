@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ShellCoach Terminal</title>
+  <link rel="stylesheet" href="/static/xterm.css" />
+  <link rel="stylesheet" href="/static/branding.css" />
+</head>
+<body>
+  <div id="header">
+    <img src="/static/kernelplus-logo.png" alt="Kernel+ Academy Logo">
+    <label style="color:white;">
+      <input type="checkbox" id="toggleExplain" checked>
+      Show Explanations
+    </label>
+  </div>
+  <div id="terminal" class="terminal"></div>
+
+  <script src="/static/xterm.js"></script>
+  <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
+  <script>
+    const term = new Terminal();
+    const socket = io();
+    term.open(document.getElementById('terminal'));
+    term.prompt = () => term.write('\r\n$ ');
+
+    let command = '';
+    let showExplanations = true;
+
+    document.getElementById('toggleExplain').addEventListener('change', (e) => {
+      showExplanations = e.target.checked;
+    });
+
+    term.prompt();
+
+    term.onKey(e => {
+      const input = e.key;
+      if (input === '\r') {
+        socket.emit('command', {command: command});
+        command = '';
+      } else {
+        command += input;
+        term.write(input);
+      }
+    });
+
+    socket.on('response', data => {
+      term.write(`\r\n${data.output}`);
+      if (showExplanations) {
+        term.write(`\r\n[Description] ${data.description}`);
+        term.write(`\r\n[Example] ${data.example}`);
+        term.write(`\r\n[Risk Level] ${data.risk}`);
+      }
+      term.prompt();
+    });
+  </script>
+</body>
+</html>

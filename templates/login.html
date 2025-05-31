@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login - ShellCoach | Kernel+ Academy</title>
+  <link rel="stylesheet" href="/static/branding.css" />
+  <style>
+    .login-container {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #0A0F24;
+    }
+    .login-box {
+      background-color: #121830;
+      padding: 30px;
+      border-radius: 8px;
+      color: #00FFAA;
+      text-align: center;
+      width: 300px;
+    }
+    input {
+      margin: 10px 0;
+      width: 90%;
+      padding: 10px;
+      border: none;
+      border-radius: 4px;
+    }
+    button {
+      background-color: #00FFAA;
+      color: #0A0F24;
+      font-weight: bold;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #00e6a0;
+    }
+    .logo {
+      height: 50px;
+      margin-bottom: 15px;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <div class="login-box">
+      <img src="/static/kernelplus-logo.png" alt="Kernel+ Logo" class="logo" />
+      <h2>Login to ShellCoach</h2>
+      <form method="POST">
+        <input name="username" placeholder="Username" required><br>
+        <input name="password" type="password" placeholder="Password" required><br>
+        <button type="submit">Login</button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>
