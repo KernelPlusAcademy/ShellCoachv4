@@ -2,5 +2,5 @@ flask
 flask_login
 flask_socketio
 pexpect
-eventlet
+eventlet==0.33.3
 gunicorn
